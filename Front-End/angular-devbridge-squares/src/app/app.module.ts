@@ -2,17 +2,21 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-//import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
+import { PointsComponent } from './components/points/points.component';
+import { PointItemComponent } from './components/point-item/point-item.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PointsComponent,
+    PointItemComponent
   ],
   imports: [
     BrowserModule,
-    //AppRoutingModule,
+    AppRoutingModule,
     HttpClientModule,
     FormsModule
   ],

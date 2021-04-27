@@ -31,4 +31,9 @@ export class PointServiceService {
     return this.http.post<Point>(this.pointsUrl, point, httpOptions);
   }
 
+  clearPoints():Observable<Point> {
+    const url = `${this.pointsUrl}`;
+    return this.http.delete<Point>(url, httpOptions);
+  }
+
 }
