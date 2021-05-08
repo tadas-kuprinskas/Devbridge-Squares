@@ -1,5 +1,15 @@
+<div class="add_clear">
+    <app-add-point (addPoint)="addPoint($event)"></app-add-point>
+    <app-clear-points (clearPoints)="clearPoints()"></app-clear-points>   
+</div>
+<app-upload-file 
+[fileList] = "fileList" 
+[fileContent] = "fileContent"
+(addFromFile)="addFromFile($event)"></app-upload-file>
+
 <app-point-item 
 *ngFor="let point of points" 
 [point] = "point"
 (deletePoint)="deletePoint($event)">
 </app-point-item>
+

@@ -9,6 +9,9 @@ import { PointServiceService } from 'src/app/services/point-service.service';
 })
 export class PointsComponent implements OnInit {
   points:Point[];
+  fileList: FileList;
+  fileContent: string;
+  
   constructor(private pointService:PointServiceService) { }
 
   ngOnInit(): void {
@@ -20,11 +23,13 @@ export class PointsComponent implements OnInit {
   addPoint(point:Point) {
     this.pointService.addPoint(point).subscribe(point => {
       if(point !== null) {
-        this.points.push(point)
+        this.points.push(point)        
       } else {
-        alert("There is already such point added.")
+        alert("Dublicate point")
       }
-    })
+    },
+    (err) => {alert("Range should be between -5000 and 5000")}
+    );
   }
 
   deletePoint(point:Point) {
@@ -39,6 +44,17 @@ export class PointsComponent implements OnInit {
     this.points = [];
     // remove from db
     this.pointService.clearPoints().subscribe();
+  }
+
+  addFromFile(fileList: FileList){
+    
+    let file = fileList[0];
+    let fileReader: FileReader = new FileReader();
+    let self = this;
+    fileReader.onloadend = function(x) {
+      self.fileContent = <string>fileReader.result;
+    }
+    fileReader.readAsText(file);
   }
 
 }

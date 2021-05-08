@@ -1,0 +1,9 @@
+.clear_points {
+    background-color: rgb(196, 17, 121);
+    color: white;
+    border: none;
+    padding: 5px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}

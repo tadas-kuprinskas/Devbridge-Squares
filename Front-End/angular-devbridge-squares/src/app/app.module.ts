@@ -7,18 +7,31 @@ import { AppComponent } from './app.component';
 import { PointsComponent } from './components/points/points.component';
 import { PointItemComponent } from './components/point-item/point-item.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AddPointComponent } from './components/add-point/add-point.component';
+import { ClearPointsComponent } from './components/clear-points/clear-points.component';
+import { UploadFileComponent } from './components/upload-file/upload-file.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     PointsComponent,
-    PointItemComponent
+    PointItemComponent,
+    AddPointComponent,
+    ClearPointsComponent,
+    UploadFileComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatButtonModule,
+    MatIconModule,
+    BrowserAnimationsModule, 
   ],
   providers: [],
   bootstrap: [AppComponent]

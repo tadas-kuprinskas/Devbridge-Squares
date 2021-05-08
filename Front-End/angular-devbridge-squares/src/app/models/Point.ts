@@ -1,5 +1,5 @@
 export class Point {
     id: number;
-    xcoordinate: number;
-    ycoordinate: number;
+    xCoordinate: number;
+    yCoordinate: number;
 }

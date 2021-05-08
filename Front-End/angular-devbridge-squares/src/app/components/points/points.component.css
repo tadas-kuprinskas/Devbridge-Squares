@@ -1,0 +1,11 @@
+.add_clear{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.file_upload{
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}

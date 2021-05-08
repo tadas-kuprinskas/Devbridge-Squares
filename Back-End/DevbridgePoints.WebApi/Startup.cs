@@ -1,5 +1,7 @@
 using DevbridgePoints.WebApi.Data;
+using DevbridgePoints.WebApi.Interfaces;
 using DevbridgePoints.WebApi.Repositories;
+using DevbridgePoints.WebApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -37,6 +39,7 @@ namespace DevbridgePoints.WebApi
 
             services.AddDbContext<DataContext>(o => o.UseSqlServer(connectionString));
             services.AddScoped<PointRepository>();
+            services.AddScoped<IFileService, FileService>();
             services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
             services.AddSwaggerGen(c =>
