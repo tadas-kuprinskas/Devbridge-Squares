@@ -4,8 +4,23 @@
     justify-content: center;
 }
 
-.file_upload{
+.container{
+    max-width: 600px;
+    margin: 30px auto;
+    overflow: auto;
+    border: 3px solid rgb(255, 255, 255);
+    padding: 30px;
+    border-radius: 20px;
     text-align: center;
-    justify-content: center;
-    margin-bottom: 30px;
+    background-color: #333;
+}
+
+.wrap{
+    max-width: 1000px;
+    margin: auto;
+    overflow: auto;
+    padding: 30px;
+    border-radius: 5px;
+    text-align: center;
+    background-color:rgb(63, 81, 181);
 }

@@ -1,16 +1,23 @@
-<div class="add_clear">
-    <app-add-point (addPoint)="addPoint($event)"></app-add-point>
-    <app-clear-points (clearPoints)="clearPoints()"></app-clear-points>   
+<div class="wrap">
+
+    <div class="container">
+        
+        <div class="add_clear">
+            <app-add-point (addPoint)="addPoint($event)"></app-add-point>
+            <app-clear-points (clearPoints)="clearPoints()"></app-clear-points>   
+        </div>
+        
+    </div>
+    
+    <app-upload-file></app-upload-file>
+    
+    <div class="container">
+        
+        <app-point-item 
+            *ngFor="let point of points" 
+            [point] = "point"
+            (deletePoint)="deletePoint($event)">
+        </app-point-item>
+    
+    </div>
 </div>
-
-<app-upload-file> 
-
-
-</app-upload-file>
-
-<app-point-item 
-*ngFor="let point of points" 
-[point] = "point"
-(deletePoint)="deletePoint($event)">
-</app-point-item>
-

@@ -1,3 +1,10 @@
-.file-input {
-    display: none;
-  }
+.container{
+  max-width: 500px;
+  margin: 30px auto;
+  overflow: auto;
+  border: 3px solid steelblue;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  background-color:rgb(225, 225, 241);
+}

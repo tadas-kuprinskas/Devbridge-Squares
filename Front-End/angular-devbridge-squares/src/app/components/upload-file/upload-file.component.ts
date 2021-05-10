@@ -46,7 +46,7 @@ export class UploadFileComponent {
       });
 
     this.chosenFiles = undefined;
-    this.pointService.getPoints();
+    location.reload();
   }  
 
 }
