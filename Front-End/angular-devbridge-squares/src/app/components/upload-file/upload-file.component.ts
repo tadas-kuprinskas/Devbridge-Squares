@@ -1,5 +1,7 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Observable } from 'rxjs';
+import { PointServiceService } from 'src/app/services/point-service.service';
 
 @Component({
   selector: 'app-upload-file',
@@ -8,24 +10,45 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class UploadFileComponent {
 
-   //fileContent: string = '';
+  constructor(private pointService:PointServiceService) { }
 
-  // public onChange(fileList: FileList): void {
-  //   let file = fileList[0];
-  //   let fileReader: FileReader = new FileReader();
-  //   let self = this;
-  //   fileReader.onloadend = function(x) {
-  //     self.fileContent = <string>fileReader.result;
-  //   }
-  //   fileReader.readAsText(file);
-  // }
 
-  @Input() fileList: FileList;
-  @Input() fileContent: string;
-  @Output() addFromFile: EventEmitter<FileList> = new EventEmitter();
+  chosenFiles: FileList;
+  existingFile: File;
+  progress = 0;
+  msg = '';
 
-  public onChange(fileList){
-    this.addFromFile.emit(fileList);
+  FileDetail: Observable<any>;
+
+
+  ngOnInit(): void {
   }
 
+  chooseFile(event): void {
+    this.chosenFiles = event.target.files;
+  }
+
+  upload(): void {
+    this.progress = 0;
+  
+    this.existingFile = this.chosenFiles.item(0);
+
+    this.pointService.uploadFile(this.existingFile).subscribe( (event) => {
+        if (event.type === HttpEventType.UploadProgress) {
+          this.progress = Math.round(100 * event.loaded / event.total);
+        } else if (event instanceof HttpResponse) {
+          this.msg = event.body.message;     
+        }
+      }, (error) => {
+        this.progress = 0;
+        this.msg = 'Error occured while uploading file';
+        this.existingFile = undefined;
+      });
+
+    this.chosenFiles = undefined;
+    this.pointService.getPoints();
+  }  
+
 }
+
+

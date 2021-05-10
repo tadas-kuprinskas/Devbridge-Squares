@@ -4,10 +4,13 @@ using DevbridgePoints.WebApi.Entities;
 using DevbridgePoints.WebApi.Helpers;
 using DevbridgePoints.WebApi.Interfaces;
 using DevbridgePoints.WebApi.Repositories;
+using DevbridgePoints.WebApi.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.ObjectPool;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,14 +22,14 @@ namespace DevbridgePoints.WebApi.Controllers
     public class PointController : ControllerBase
     {
         private readonly PointRepository _repository;
-        private readonly IMapper _mapper;
         private readonly IFileService _fileService;
+        private readonly IParsingService _parsingService;
 
-        public PointController(PointRepository repository, IMapper mapper, IFileService fileService)
+        public PointController(PointRepository repository, IFileService fileService, IParsingService parsingService)
         {
             _repository = repository;
-            _mapper = mapper;
             _fileService = fileService;
+            _parsingService = parsingService;
         }
 
         [HttpGet]
@@ -58,11 +61,13 @@ namespace DevbridgePoints.WebApi.Controllers
             await _repository.ClearAllPoints();
         }
 
+
         [HttpPost("upload")]
-        public async Task<IEnumerable<Point>> UploadFromFile(string filePath)
+        public async Task<IEnumerable<Point>> UploadFromFile(IFormFile file)
         {
-            var pointsFromFile = await _fileService.ReadFromFile(filePath);
-            return await _repository.UploadFromFileAsync((List<Point>)pointsFromFile);
+            var textFromFile = await _fileService.ReadFromFile(file);
+            var parsed = _parsingService.ParseToPointList(textFromFile);
+            return await _repository.UploadFromFileAsync(parsed);           
         }
     }
 }

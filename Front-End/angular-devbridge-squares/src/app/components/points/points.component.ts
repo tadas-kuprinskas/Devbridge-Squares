@@ -45,16 +45,4 @@ export class PointsComponent implements OnInit {
     // remove from db
     this.pointService.clearPoints().subscribe();
   }
-
-  addFromFile(fileList: FileList){
-    
-    let file = fileList[0];
-    let fileReader: FileReader = new FileReader();
-    let self = this;
-    fileReader.onloadend = function(x) {
-      self.fileContent = <string>fileReader.result;
-    }
-    fileReader.readAsText(file);
-  }
-
 }

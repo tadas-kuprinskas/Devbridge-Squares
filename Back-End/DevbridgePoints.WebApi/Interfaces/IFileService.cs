@@ -1,4 +1,5 @@
 ﻿using DevbridgePoints.WebApi.Entities;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -6,8 +7,6 @@ namespace DevbridgePoints.WebApi.Interfaces
 {
     public interface IFileService
     {
-        //string FilePath { get; set; }
-
-        Task<IEnumerable<Point>> ReadFromFile(string filePath);
+        Task<string> ReadFromFile(IFormFile file);
     }
 }

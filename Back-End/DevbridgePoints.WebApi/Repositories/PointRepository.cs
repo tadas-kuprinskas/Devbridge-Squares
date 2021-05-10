@@ -53,7 +53,7 @@ namespace DevbridgePoints.WebApi.Repositories
         {
             await ClearAllPoints();
 
-            List<Point> pointListFromFile = new();
+            //List<Point> pointListFromFile = new();
 
             foreach (var item in pointsFromFile)
             {        
@@ -61,9 +61,8 @@ namespace DevbridgePoints.WebApi.Repositories
             }
             await _dataContext.SaveChangesAsync();
 
-            await GetAllPoints();
+            return await GetAllPoints();
 
-            return pointListFromFile;
         }
     }
 }

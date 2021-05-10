@@ -40,6 +40,7 @@ namespace DevbridgePoints.WebApi
             services.AddDbContext<DataContext>(o => o.UseSqlServer(connectionString));
             services.AddScoped<PointRepository>();
             services.AddScoped<IFileService, FileService>();
+            services.AddScoped<IParsingService, ParsingService>();
             services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
             services.AddSwaggerGen(c =>

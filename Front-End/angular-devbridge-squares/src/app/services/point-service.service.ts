@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Point } from '../models/Point';
@@ -36,4 +36,18 @@ export class PointServiceService {
     return this.http.delete<Point>(url, httpOptions);
   }
 
+  uploadFile(file: File): Observable<HttpEvent<any>> {
+    const formData: FormData = new FormData();
+
+    formData.append('file', file);
+
+    const request = new HttpRequest('POST', `${this.pointsUrl}/upload`, formData, {
+      reportProgress: true,
+      responseType: 'json'
+    });
+
+    return this.http.request(request);
+  }
+
+ 
 }
