@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Point } from 'src/app/models/Point';
 import { PointServiceService } from 'src/app/services/point-service.service';
 
@@ -22,14 +23,15 @@ export class PointsComponent implements OnInit {
 
   addPoint(point:Point) {
     this.pointService.addPoint(point).subscribe(point => {
-      if(point !== null) {
-        this.points.push(point)        
+      if(point !== null) {  
+        this.points.push(point)  
       } else {
         alert("Dublicate point")
       }
     },
     (err) => {alert("Range should be between -5000 and 5000")}
     );
+    
   }
 
   deletePoint(point:Point) {

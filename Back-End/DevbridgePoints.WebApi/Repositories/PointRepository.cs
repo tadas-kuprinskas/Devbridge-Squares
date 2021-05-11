@@ -53,8 +53,6 @@ namespace DevbridgePoints.WebApi.Repositories
         {
             await ClearAllPoints();
 
-            //List<Point> pointListFromFile = new();
-
             foreach (var item in pointsFromFile)
             {        
                 _dataContext.Add(item);

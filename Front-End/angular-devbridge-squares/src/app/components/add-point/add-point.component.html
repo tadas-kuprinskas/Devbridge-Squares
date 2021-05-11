@@ -1,4 +1,4 @@
-<form class="add-form" (ngSubmit)="onSubmit()">
+<form #myForm="ngForm" class="add-form" (ngSubmit)="onSubmit(); myForm.resetForm()">
     <input type="text" name="xCoordinate" [(ngModel)] = "xCoordinate" placeholder="X Coordinate">
     <input type="text" name="yCoordinate" [(ngModel)] = "yCoordinate" placeholder="Y Coordinate">
     <input type="submit" value="Add" class="btn">

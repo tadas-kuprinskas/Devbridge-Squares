@@ -22,6 +22,7 @@ export class AddPointComponent implements OnInit {
       yCoordinate: this.yCoordinate
     }
     this.addPoint.emit(point);
+    
   }
 
 }

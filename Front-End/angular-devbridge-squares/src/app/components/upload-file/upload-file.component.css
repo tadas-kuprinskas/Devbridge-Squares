@@ -2,7 +2,7 @@
   max-width: 500px;
   margin: 30px auto;
   overflow: auto;
-  border: 3px solid steelblue;
+  border: 3px solid rgb(255, 255, 255);
   padding: 30px;
   border-radius: 20px;
   text-align: center;

@@ -42,7 +42,6 @@ import { HeaderComponent } from './components/header/header.component';
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-
   ],
   providers: [],
   bootstrap: [AppComponent]
