@@ -21,11 +21,11 @@ namespace DevbridgePoints.WebApi.Controllers
     [Route("[controller]")]
     public class PointController : ControllerBase
     {
-        private readonly PointRepository _repository;
+        private readonly IPointRepository _repository;
         private readonly IFileService _fileService;
         private readonly IParsingService _parsingService;
 
-        public PointController(PointRepository repository, IFileService fileService, IParsingService parsingService)
+        public PointController(IPointRepository repository, IFileService fileService, IParsingService parsingService, IFindSquareService findSquareService)
         {
             _repository = repository;
             _fileService = fileService;

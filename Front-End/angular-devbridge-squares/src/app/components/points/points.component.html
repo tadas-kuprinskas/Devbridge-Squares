@@ -1,7 +1,7 @@
 <div class="wrap">
 
     <div class="container">
-        
+        <h4>Add Point</h4>
         <div class="add_clear">
             <app-add-point (addPoint)="addPoint($event)"></app-add-point>
             <app-clear-points (clearPoints)="clearPoints()"></app-clear-points>   
@@ -12,7 +12,7 @@
     <app-upload-file></app-upload-file>
     
     <div class="container">
-        
+        <h4>List of Points</h4>
         <app-point-item 
             *ngFor="let point of points" 
             [point] = "point"
@@ -20,4 +20,6 @@
         </app-point-item>
     
     </div>
+
+    <app-squares></app-squares>
 </div>

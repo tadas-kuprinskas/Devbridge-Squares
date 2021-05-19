@@ -2,6 +2,7 @@
 using DevbridgePoints.WebApi.Data;
 using DevbridgePoints.WebApi.DTOs;
 using DevbridgePoints.WebApi.Entities;
+using DevbridgePoints.WebApi.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace DevbridgePoints.WebApi.Repositories
 {
-    public class PointRepository
+    public class PointRepository : IPointRepository
     {
         private readonly DataContext _dataContext;
         private readonly IMapper _mapper;
@@ -54,7 +55,7 @@ namespace DevbridgePoints.WebApi.Repositories
             await ClearAllPoints();
 
             foreach (var item in pointsFromFile)
-            {        
+            {
                 _dataContext.Add(item);
             }
             await _dataContext.SaveChangesAsync();

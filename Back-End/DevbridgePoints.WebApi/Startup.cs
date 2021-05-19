@@ -38,9 +38,10 @@ namespace DevbridgePoints.WebApi
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             services.AddDbContext<DataContext>(o => o.UseSqlServer(connectionString));
-            services.AddScoped<PointRepository>();
+            services.AddScoped<IPointRepository, PointRepository>();
             services.AddScoped<IFileService, FileService>();
             services.AddScoped<IParsingService, ParsingService>();
+            services.AddScoped<IFindSquareService, FindSquareService>();
             services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
             services.AddSwaggerGen(c =>

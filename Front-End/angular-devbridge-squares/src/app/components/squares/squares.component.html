@@ -1,0 +1,8 @@
+<div class="container">
+    <h4>List of Squares</h4>
+    <p class="title">Number of squares: {{numberOfSquares}}</p>
+    <app-square-item
+    *ngFor="let square of squares"
+    [square] = "square"
+    ></app-square-item>
+</div>

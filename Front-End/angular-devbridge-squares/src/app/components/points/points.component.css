@@ -13,6 +13,16 @@
     border-radius: 20px;
     text-align: center;
     background-color: #333;
+    background-image: radial-gradient(#212121 20%, transparent 20%),
+      radial-gradient(#423d3d 20%, transparent 40%);
+    background-position: 0 0, 50px 50px;
+    background-size: 100px 100px;
+}
+
+.container h4{
+    color: #fff;
+    font-size:1.8rem;
+    font-family: Lato;
 }
 
 .wrap{
@@ -22,4 +32,10 @@
     padding: 30px;
     text-align: center;
     background-color:rgb(63, 81, 181);
+    background-color: rgb(108, 126, 219);
+    background-image:
+      linear-gradient(45deg, rgb(63, 81, 181) 25%, transparent 25%, 
+        transparent 5%, rgb(63, 81, 181) 5%, rgb(63, 104, 181));
+    background-size: 100px 100px;
+    background-position: 0 0, 50px 50px;
 }
