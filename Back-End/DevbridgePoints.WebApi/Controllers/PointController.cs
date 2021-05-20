@@ -23,13 +23,11 @@ namespace DevbridgePoints.WebApi.Controllers
     {
         private readonly IPointRepository _repository;
         private readonly IFileService _fileService;
-        private readonly IParsingService _parsingService;
 
-        public PointController(IPointRepository repository, IFileService fileService, IParsingService parsingService, IFindSquareService findSquareService)
+        public PointController(IPointRepository repository, IFileService fileService)
         {
             _repository = repository;
             _fileService = fileService;
-            _parsingService = parsingService;
         }
 
         [HttpGet]
@@ -66,8 +64,7 @@ namespace DevbridgePoints.WebApi.Controllers
         public async Task<IEnumerable<Point>> UploadFromFile(IFormFile file)
         {
             var textFromFile = await _fileService.ReadFromFile(file);
-            var parsed = _parsingService.ParseToPointList(textFromFile);
-            return await _repository.UploadFromFileAsync(parsed);           
+            return await _repository.UploadFromFileAsync(textFromFile);           
         }
     }
 }

@@ -13,7 +13,14 @@ namespace DevbridgePoints.WebApi.Services
 {
     public class FileService : IFileService
     {
-        public async Task<string> ReadFromFile(IFormFile file)
+        private readonly IParsingService _parsingService;
+
+        public FileService(IParsingService parsingService)
+        {
+            _parsingService = parsingService;
+        }
+
+        public async Task<string> ReadAsString(IFormFile file)
         {
             if (file == null || file.Length == 0)
             {
@@ -23,5 +30,13 @@ namespace DevbridgePoints.WebApi.Services
             using var reader = new StreamReader(file.OpenReadStream());
             return await reader.ReadToEndAsync();
         }
+
+        public async Task<IEnumerable<Point>> ReadFromFile(IFormFile file)
+        {
+            var text = await ReadAsString(file);
+
+            return _parsingService.ParseToPointList(text);
+        }
+
     }
 }

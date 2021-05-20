@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DevbridgePoints.WebApi.DTOs;
 using DevbridgePoints.WebApi.Entities;
+using DevbridgePoints.WebApi.Helpers;
 using DevbridgePoints.WebApi.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -21,26 +22,40 @@ namespace DevbridgePoints.WebApi.Services
 
         public IEnumerable<Point> ParseToPointList(string lineOfNumbers)
         {
-            var listOfNumbers = lineOfNumbers.Split(' ').Select(number => int.Parse(number)).ToList();
+            var listOfNumbers = lineOfNumbers.Split('\n').ToList();
             List<Point> listOfPoints = new();
 
-            for (var x = 0; x < listOfNumbers.Count; x+=2)
+            for (int x = 0; x < listOfNumbers.Count; x++)
             {
+                var pair = listOfNumbers[x].Split(" ");
 
                 PointDto pointDto = new()
                 {
-                    //item.XCoordinate = listOfNumbers[x]
-                    //item.YCoordinate = listOfNumbers[x + 1];
-                    XCoordinate = listOfNumbers[x],
-                    YCoordinate = listOfNumbers[x + 1]
+                    XCoordinate = int.Parse(pair[0]),
+                    YCoordinate = int.Parse(pair[1])
                 };
+ 
+                var dublicate = ValidationHelpers.ValidateDublicates(listOfPoints, pointDto);
+                var pointRange = ValidationHelpers.ValidatePointRange(pointDto);
 
-                var point = _mapper.Map<Point>(pointDto);
-                listOfPoints.Add(point);
+                
+                if(dublicate == null && pointRange == null)
+                {
+                    var point = _mapper.Map<Point>(pointDto);
 
+                    listOfPoints.Add(point);
+                }
             }
+            var validatedLimit = ValidationHelpers.ValidateLimit(listOfPoints);
 
-            return listOfPoints;
+            if (validatedLimit == null)
+            {
+                return listOfPoints;
+            }
+            else
+            {
+                return listOfPoints.Take(10000);
+            }
         }
     }
 }

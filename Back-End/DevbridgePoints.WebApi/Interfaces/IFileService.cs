@@ -7,6 +7,7 @@ namespace DevbridgePoints.WebApi.Interfaces
 {
     public interface IFileService
     {
-        Task<string> ReadFromFile(IFormFile file);
+        Task<string> ReadAsString(IFormFile file);
+        Task<IEnumerable<Point>> ReadFromFile(IFormFile file);
     }
 }
